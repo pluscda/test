@@ -23,7 +23,7 @@ app.use(webpackHotMiddleware(compiler))
 //get random ad from mock data
 const getAd = (type = '') => {
     const ads = type
-      ? data.filter(ad => ad.type === type || !ad.success)
+      ? data.filter(ad => ad.type === type)
       : data;
   
     const ad = ads[random(0, ads.length)];
@@ -31,7 +31,7 @@ const getAd = (type = '') => {
       ...ad,
       id: genAdId()
     }
-  }
+}
 
 //api endpoint
 app.get('/ads', (req, res) => {
