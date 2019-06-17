@@ -15,7 +15,7 @@ class AotterConfig {
         this.cbAdImpression = this.cbAdImpression.bind(this);
     }
     constructAotterObj(){
-      let obj = {
+      const obj = {
             width: this.width,
             height: this.height,
             loadType: this.loadType,
@@ -45,9 +45,7 @@ const initAdv = () => {
     });
 
     const adObj = new adLib(aotter1.constructAotterObj());
-}
-
-
+}//initAdv
 
 if (window.addEventListener) {
     window.addEventListener('load', initAdv);
