@@ -8,13 +8,18 @@ import data from '../../src/data/mock-data.json'
 
 const random = (min, max) => Math.floor(Math.random() * (max - min) ) + min;
 const genAdId = () => `${+new Date()}-${random(0, 1000)}`;
+var cors = require('cors');
+var corsOptions = {
+    origin: '*',
+    credentials: true };
+
 
 const app = express(),
             DIST_DIR = __dirname,
             HTML_FILE = path.join(DIST_DIR, 'index.html'),
             compiler = webpack(config),
             JS_FILE = path.join(DIST_DIR, 'aotterPlayer.js');
-
+app.use(cors());
 app.use(webpackDevMiddleware(compiler, {
   publicPath: config.output.publicPath
 }))

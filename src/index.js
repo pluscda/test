@@ -14,6 +14,7 @@ let cbAdImpression = (data) => {
 }
 
 const initAdv = () => {
+    // config vid
     let config =  {
        width: 650,
        height: 390,
@@ -26,6 +27,17 @@ const initAdv = () => {
        }
     };
     new AotterPlayer(config);
+    //config img
+    config =  {
+        id: "player_aotter2",
+        loadType: 'BANNER',
+        events: {
+         cbAdLoaded: cbAdLoaded,
+         cbAdFailed: cbAdFailed,
+         cbAdImpression: cbAdImpression,
+        }
+     };
+     new AotterPlayer(config);
 }//initAdv
 
 if (window.addEventListener) {

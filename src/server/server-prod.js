@@ -3,12 +3,6 @@ import express from 'express'
 const random = (min, max) => Math.floor(Math.random() * (max - min) ) + min;
 const genAdId = () => `${+new Date()}-${random(0, 1000)}`;
 import data from '../../src/data/mock-data.json'
-var cors = require('cors');
-var corsOptions = {
-    origin: '*',
-    credentials: true };
-
-app.use(cors(corsOptions));
 
 const app = express(),
             DIST_DIR = __dirname,
@@ -17,6 +11,16 @@ const app = express(),
 
 
 app.use(express.static(DIST_DIR))
+
+app.all('*', function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", req.headers.origin); //需要显示设置来源
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
+    res.header("Access-Control-Allow-Credentials",true); //带cookies
+    res.header("X-Powered-By",' 3.2.1')
+    res.header("Content-Type", "application/json;charset=utf-8");
+    next();
+});
 //get random ad from mock data
 const getAd = (type = '') => {
     const ads = type
