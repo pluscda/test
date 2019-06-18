@@ -48,6 +48,7 @@ app.get('/ads', (req, res) => {
     res.json(getAd(type.toUpperCase()));
 })
 
+// get our sdk lib through this api
 app.get('/aotterPlayer', (req, res) => {
     compiler.outputFileSystem.readFile(JS_FILE, (err, result) => {
     if (err) {
