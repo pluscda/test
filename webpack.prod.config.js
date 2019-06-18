@@ -7,7 +7,7 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 module.exports = {
   entry: {
     main: './src/index.js',
-    add: './lib/adder.js'
+    aotterPlayer: './lib/advLib.js'
   },
   output: {
     path: path.join(__dirname, 'dist'),

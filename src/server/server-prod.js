@@ -2,6 +2,7 @@ import path from 'path'
 import express from 'express'
 const random = (min, max) => Math.floor(Math.random() * (max - min) ) + min;
 const genAdId = () => `${+new Date()}-${random(0, 1000)}`;
+import data from '../../src/data/mock-data.json'
 
 const app = express(),
             DIST_DIR = __dirname,
@@ -9,9 +10,37 @@ const app = express(),
 
 
 app.use(express.static(DIST_DIR))
+//get random ad from mock data
+const getAd = (type = '') => {
+    const ads = type
+      ? data.filter(ad => ad.type === type)
+      : data;
+  
+    const ad = ads[random(0, ads.length)];
+    return {
+      ...ad,
+      id: genAdId()
+    }
+}
 
-app.get('*', (req, res) => {
-    res.sendFile(HTML_FILE)
+//api endpoint
+app.get('/ads', (req, res) => {
+    /**
+     * type: requested ad type
+     */
+    const { type = '' } = req.query;
+    res.json(getAd(type.toUpperCase()));
+})
+
+app.get('*', (req, res, next) => {
+  compiler.outputFileSystem.readFile(HTML_FILE, (err, result) => {
+  if (err) {
+    return next(err)
+  }
+  res.set('content-type', 'text/html')
+  res.send(result)
+  res.end()
+  })
 })
 
 const PORT = process.env.PORT || 8080

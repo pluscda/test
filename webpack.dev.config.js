@@ -5,7 +5,7 @@ const HtmlWebPackPlugin = require('html-webpack-plugin')
 module.exports = {
   entry: {
     main: ['webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000', './src/index.js'],
-    aotterLib: './lib/advLib.js'
+    aotterPlayer: './lib/advLib.js'
   },
   output: {
     path: path.join(__dirname, 'dist'),
