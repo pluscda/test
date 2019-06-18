@@ -3,10 +3,17 @@ import express from 'express'
 const random = (min, max) => Math.floor(Math.random() * (max - min) ) + min;
 const genAdId = () => `${+new Date()}-${random(0, 1000)}`;
 import data from '../../src/data/mock-data.json'
+var cors = require('cors');
+var corsOptions = {
+    origin: '*',
+    credentials: true };
+
+app.use(cors(corsOptions));
 
 const app = express(),
             DIST_DIR = __dirname,
-            HTML_FILE = path.join(DIST_DIR, 'index.html')
+            HTML_FILE = path.join(DIST_DIR, 'index.html'),
+            JS_FILE = path.join(DIST_DIR, 'aotterPlayer.js');
 
 
 app.use(express.static(DIST_DIR))
@@ -30,6 +37,16 @@ app.get('/ads', (req, res) => {
      */
     const { type = '' } = req.query;
     res.json(getAd(type.toUpperCase()));
+})
+
+app.get('/aotterPlayer', (req, res) => {
+    compiler.outputFileSystem.readFile(JS_FILE, (err, result) => {
+    if (err) {
+        return next(err)
+    }
+    res.send(result)
+    res.end()
+    })
 })
 
 app.get('*', (req, res, next) => {
