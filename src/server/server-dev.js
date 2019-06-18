@@ -12,7 +12,8 @@ const genAdId = () => `${+new Date()}-${random(0, 1000)}`;
 const app = express(),
             DIST_DIR = __dirname,
             HTML_FILE = path.join(DIST_DIR, 'index.html'),
-            compiler = webpack(config)
+            compiler = webpack(config),
+            JS_FILE = path.join(DIST_DIR, 'aotterPlayer.js');
 
 app.use(webpackDevMiddleware(compiler, {
   publicPath: config.output.publicPath
@@ -40,6 +41,16 @@ app.get('/ads', (req, res) => {
      */
     const { type = '' } = req.query;
     res.json(getAd(type.toUpperCase()));
+})
+
+app.get('/aotterPlayer', (req, res) => {
+    compiler.outputFileSystem.readFile(JS_FILE, (err, result) => {
+    if (err) {
+        return next(err)
+    }
+    res.send(result)
+    res.end()
+    })
 })
 
 app.get('*', (req, res, next) => {
