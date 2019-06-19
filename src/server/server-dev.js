@@ -8,10 +8,7 @@ import data from '../../src/data/mock-data.json'
 
 const random = (min, max) => Math.floor(Math.random() * (max - min) ) + min;
 const genAdId = () => `${+new Date()}-${random(0, 1000)}`;
-var cors = require('cors');
-var corsOptions = {
-    origin: '*',
-    credentials: true };
+
 
 
 const app = express(),
@@ -19,17 +16,25 @@ const app = express(),
             HTML_FILE = path.join(DIST_DIR, 'index.html'),
             compiler = webpack(config),
             JS_FILE = path.join(DIST_DIR, 'aotterPlayer.js');
-app.use(cors());
+           
 app.use(webpackDevMiddleware(compiler, {
   publicPath: config.output.publicPath
 }))
 app.use(webpackHotMiddleware(compiler))
 
-
+app.all('*', function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", req.headers.origin); 
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
+    res.header("Access-Control-Allow-Credentials",true); 
+    res.header("X-Powered-By",' 3.2.1')
+    res.header("Content-Type", "application/json;charset=utf-8");
+    next();
+});
 //get random ad from mock data
 const getAd = (type = '') => {
     const ads = type
-      ? data.filter(ad => ad.type === type)
+      ? data.filter(ad => ad.type === type || !ad.success)
       : data;
   
     const ad = ads[random(0, ads.length)];
@@ -46,6 +51,11 @@ app.get('/ads', (req, res) => {
      */
     const { type = '' } = req.query;
     res.json(getAd(type.toUpperCase()));
+})
+
+
+app.get('/impression', (req, res) => {
+    res.json({success: true});
 })
 
 // get our sdk lib through this api

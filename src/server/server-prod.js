@@ -43,6 +43,10 @@ app.get('/ads', (req, res) => {
     res.json(getAd(type.toUpperCase()));
 })
 
+app.get('/impression', (req, res) => {
+    res.json({success: true});
+})
+
 app.get('/aotterPlayer', (req, res) => {
     compiler.outputFileSystem.readFile(JS_FILE, (err, result) => {
     if (err) {
