@@ -3,15 +3,15 @@ import './css/style.css'
 
 
 let cbAdLoaded = (id) => {  // id === player_aotter1 or player_aotter2
-    console.log('aotter id loaded ok: ' + id);
+    console.log('loaded ok aotter id : ' + id);
     //document.querySelector("#" + id).style.transform="scale(1)";
 }
 let cbAdFailed = (id) => {
-    console.log('aotter id loaded fail: ' + id);
+    console.log('loaded fail aotter id : ' + id);
     // document.querySelector("#" + id).style.display = "none";
 }
 let cbAdImpression = (id) => {
-    console.log('aotter id Impression: ' + id);
+    console.log('Impression aotter id : ' + id);
 }
 
 const initAdv = () => {
