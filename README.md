@@ -1,6 +1,6 @@
-# Aotter Player SDK
+# Aotter Player SDK Library
 
-Aotter Player SDK is the bare-bones Express and Webpack boilerplate with ES6+ babel transpilation, ESLint linting, Hot Module Reloading, and Jest test framework enabled.
+Aotter Player SDK is the Express and Webpack combine with ES6+ babel transpilation, Hot Module Reloading (in dev mode).
 
 Aotter Player SDK has two build modes: Development and Production.
 
