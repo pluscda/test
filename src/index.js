@@ -1,16 +1,17 @@
 import AotterPlayer from '../lib/advLib'
 import './css/style.css'
-//window.alert = () => {};
 
-let cbAdLoaded = (el) => {
-    console.log('data is loaded ok');
-    // /el.style.transform="scale(0)";
+
+let cbAdLoaded = (id) => {  // id === player_aotter1 or player_aotter2
+    console.log('aotter id loaded ok: ' + id);
+    //document.querySelector("#" + id).style.transform="scale(1)";
 }
-let cbAdFailed = (data) => {
-
+let cbAdFailed = (id) => {
+    console.log('aotter id loaded fail: ' + id);
+    // document.querySelector("#" + id).style.display = "none";
 }
-let cbAdImpression = (data) => {
-
+let cbAdImpression = (id) => {
+    console.log('aotter id Impression: ' + id);
 }
 
 const initAdv = () => {
@@ -27,7 +28,7 @@ const initAdv = () => {
        }
     };
     new AotterPlayer(config);
-    //config img
+    //config BANNER
     config =  {
         id: "player_aotter2",
         loadType: 'BANNER',
