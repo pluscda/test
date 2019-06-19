@@ -15,7 +15,7 @@ let cbAdImpression = (id) => {
 }
 
 const initAdv = () => {
-    // config vid
+    // config vid; it will use youtube iframe API
     let config =  {
        width: 650,
        height: 390,
