@@ -17,4 +17,4 @@ When you run `npm run buildProd`, Javascript, HTML, and CSS files are all minifi
     
     npm run buildDev  && npm start       // for development navigate to localhost:8080 for local dev
         // OR
-    npm run buildProd && npm start     //  for testing with Vue example navigate to localhost:8080 for local example
+    npm run buildProd && npm start     //  for testing  navigate to localhost:8080 for local example
